@@ -85,6 +85,6 @@ malumotlar TEXT NOT NULL)
 </head>
 <body>
     <h1 style="color: green;">ma'lumotlar bazasi muvaffaqiyatli yaratildi!</h1>
-    <a href="dasturlash.php" style="padding: 3px 10px;background: black; color: wheat;font-size: 22px;text-decoration:none;">Kirish</a>
+    <a href="index.html" style="padding: 3px 10px;background: black; color: wheat;font-size: 22px;text-decoration:none;">Ortga</a>
 </body>
 </html>
