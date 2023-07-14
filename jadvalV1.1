@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./bulma-0.9.4/bulma/css/bulma.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>JADVAL</title>
+    </head>
+<style>
+    details>table, th, td {
+      border:1px solid black;
+      padding: 10px;
+    }
+    details{
+        cursor: pointer;
+        border: 1px solid black;
+        padding: 10px;
+        margin: 2px;
+    }
+    table>tr>th{
+        text-align: center;
+    }
+    .btnBack{
+            padding: 15px 25px;
+            text-decoration: none;
+            color: white;
+            background-color: blue;
+            outline: 3px solid blue;
+            border: 3px solid white;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+    .btnBack:hover{
+            padding: 15px 20px;
+            text-decoration: none;
+            color: blue;
+            background-color: white;
+            outline: 3px solid white;
+            border: 3px solid blue;
+            border-radius: 5px;
+            transition: all 0.3s;
+    }
+    </style>
+<body>
+    <?php
+        $db = new mysqli("localhost", "root", "", "dastur");
+        $bz = "SHOW TABLES";
+        $result = $db -> query($bz);
+
+        while ($row = $result -> fetch_assoc()) {
+            echo "<details><summary>".$row['Tables_in_dastur']."</summary><table> <tr>
+            <th>N/n</th>
+            <th>Ism</th>
+            <th>Familya</th>
+            <th>Telefon raqam-1</th>
+            <th>Telefon raqam-2</th>
+            <th>Davomat(oxirgi)</th>
+            <th>To'lov / Sana</th>
+            <th>Ma`lumotlar</th>";
+            $sql = "SELECT * FROM `$row[Tables_in_dastur]`";
+            $result2 = $db -> query($sql);
+
+            while ($row2 = $result2 -> fetch_assoc()) {
+                echo "<tr>
+                <td>".$row2['id']."</td>
+                <td>".$row2['ism']."</td>
+                <td>".$row2['familiya']."</td>
+                <td><a href=`tel:".$row2['telefon']."`>".$row2['telefon']."</a></td>
+                <td><a href=`tel:".$row2['telefon2']."`>".$row2['telefon2']."</a></td>
+                <td>".$row2['davomat']."</td>
+                <td>".$row2['tulov']."</td>
+                <td><a>Kirish</a></td>
+            </tr>";
+            };
+            echo "</table></details>";
+        };
+    ?>
+</body>
+</html>
