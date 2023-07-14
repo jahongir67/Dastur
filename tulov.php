@@ -19,21 +19,24 @@
         <form action="<?php $_SERVER['PHP_SELF'];?>" method="post" style="display: flex;gap: 20px;width: max-content;margin: 20px;">
         <div>
             <div class="select is-link">
-                <select name="klasslar" id="sl" style="border-color:red;">
-                    <option value="1">1 guruh</option>
-                    <option value="2">2 guruh</option>
-                    <option value="3">3 guruh</option>
-                    <option value="4">4 guruh</option>
-                    <option value="5">5 guruh</option>
-                    <option value="6">6 guruh</option>
-                </select>
+            <select name='klasslar' id="sl">
+                <?php
+                    $db = new mysqli("localhost", "root", "", "dastur");
+                    $bz = "SHOW TABLES";
+                    $result = $db -> query($bz);
+
+                    while ($row = $result -> fetch_assoc()) {
+                        echo "<option value='".$row['Tables_in_dastur']."'>".$row['Tables_in_dastur']."</option>";
+                    };
+                    echo "</select>";
+                ?>
             </div>
     </div>
             <input type="number" name="userID" id="userID" placeholder="ID" class="input is-link" style="width: 60px;border-color:red;">
             <div style="display: flex;justify-content: space-between;">
                 <div class="select is-link">
                     <select name="tulov" id="tulov" style="border-color:red;">
-                        <option value="Nomalum">Nomalum</option>
+                        <option value="0"></option>
                         <option value="To'lov Qilindi">To'lov qildi</option>
                         <option value="To'lov Qilinmadi">To'lov qilmadi</option>
                     </select>
@@ -76,9 +79,9 @@ if(!empty($_POST['klasslar']) && !empty($_POST['userID']) && !empty($_POST['tulo
     $tul = $_POST['tulov'];
     $tuls = $_POST['tulov_sana'];
 
-    if($_POST['klasslar'] == "1"){
-        $sql->query("UPDATE guruh1 SET `tulov` = '$tuls' WHERE id = '$uid'");
-        $r = $sql->query("SELECT * FROM guruh1");
+    
+        $sql->query("UPDATE $_POST[klasslar] SET `tulov` = '$tuls' WHERE id = '$uid'");
+        $r = $sql->query("SELECT * FROM $_POST[klasslar]");
         while($row = $r->fetch_assoc()){
             if($uid == $row['id']){
                 $nm = $row["ism"] . " " . $row["familiya"];
@@ -86,69 +89,10 @@ if(!empty($_POST['klasslar']) && !empty($_POST['userID']) && !empty($_POST['tulo
                 $f = fopen("./Base/" . $kls . "_" . $uid . ".txt", "a") or die("Fayl topilmadi 404");
                 fwrite($f, $nm .  " " . $tul . " " . $tuls . "\n");
                 fclose($f);
+            } else {
+                echo "<h2 style='color:red;margin-left:20px;'>O'quvchi topilmadi</h2>";
             }
         }
-    } else if ($_POST['klasslar'] == "2"){
-        $sql->query("UPDATE guruh2 SET `tulov` = '$tuls' WHERE id = '$uid'");
-        $r = $sql->query("SELECT * FROM guruh2");
-        while($row = $r->fetch_assoc()){
-            if($uid == $row['id']){
-                $nm = $row["ism"] . " " . $row["familiya"];
-                echo "<h2 style='color:green;margin-left:20px;'>Ma'lumotlar to'g'ri yuborildi</h2>";
-                $f = fopen("./Base/" . $kls . "_" . $uid . ".txt", "a") or die("Fayl topilmadi 404");
-                fwrite($f, $nm .  " " . $tul . " " . $tuls . "\n");
-                fclose($f);
-            }
-        }
-    } else if ($_POST['klasslar'] == "3"){
-        $sql->query("UPDATE guruh3 SET `tulov` = '$tuls' WHERE id = '$uid'");
-        $r = $sql->query("SELECT * FROM guruh3");
-        while($row = $r->fetch_assoc()){
-            if($uid == $row['id']){
-                $nm = $row["ism"] . " " . $row["familiya"];
-                echo "<h2 style='color:green;margin-left:20px;'>Ma'lumotlar to'g'ri yuborildi</h2>";
-                $f = fopen("./Base/" . $kls . "_" . $uid . ".txt", "a") or die("Fayl topilmadi 404");
-                fwrite($f, $nm .  " " . $tul . " " . $tuls . "\n");
-                fclose($f);
-            }
-        }
-    } else if ($_POST['klasslar'] == "4"){
-        $sql->query("UPDATE guruh4 SET `tulov` = '$tuls' WHERE id = '$uid'");
-        $r = $sql->query("SELECT * FROM guruh4");
-        while($row = $r->fetch_assoc()){
-            if($uid == $row['id']){
-                $nm = $row["ism"] . " " . $row["familiya"];
-                echo "<h2 style='color:green;margin-left:20px;'>Ma'lumotlar to'g'ri yuborildi</h2>";
-                $f = fopen("./Base/" . $kls . "_" . $uid . ".txt", "a") or die("Fayl topilmadi 404");
-                fwrite($f, $nm .  " " . $tul . " " . $tuls . "\n");
-                fclose($f);
-            }
-        }
-    } else if ($_POST['klasslar'] == "5"){
-        $sql->query("UPDATE guruh5 SET `tulov` = '$tuls' WHERE id = '$uid'");
-        $r = $sql->query("SELECT * FROM guruh5");
-        while($row = $r->fetch_assoc()){
-            if($uid == $row['id']){
-                $nm = $row["ism"] . " " . $row["familiya"];
-                echo "<h2 style='color:green;margin-left:20px;'>Ma'lumotlar to'g'ri yuborildi</h2>";
-                $f = fopen("./Base/" . $kls . "_" . $uid . ".txt", "a") or die("Fayl topilmadi 404");
-                fwrite($f, $nm .  " " . $tul . " " . $tuls . "\n");
-                fclose($f);
-            } 
-        }
-    } else if ($_POST['klasslar'] == "6"){
-        $sql->query("UPDATE guruh6 SET `tulov` = '$tuls' WHERE id = '$uid'");
-        $r = $sql->query("SELECT * FROM guruh6");
-        while($row = $r->fetch_assoc()){
-            if($uid == $row['id']){
-                $nm = $row["ism"] . " " . $row["familiya"];
-                echo "<h2 style='color:green;margin-left:20px;'>Ma'lumotlar to'g'ri yuborildi</h2>";
-                $f = fopen("./Base/" . $kls . "_" . $uid . ".txt", "a") or die("Fayl topilmadi 404");
-                fwrite($f, $nm .  " " . $tul . " " . $tuls . "\n");
-                fclose($f);
-            }
-        }
-    }
 } else {
     echo "<h1 style='color:red;margin-left:20px;'>Bo'sh joylarni to'ldiring!</h1>";
 }
