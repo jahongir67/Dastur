@@ -1,3 +1,4 @@
+<?php include "db.php";?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -113,6 +114,7 @@
                 <option value="6">6 guruh</option>
             </select>
         </div>
+        
         <br><br>
         <input type="submit" value="Qo'shish" class="button is-info">
     </form>
@@ -153,10 +155,6 @@
 </html>
 
 <?php
-    $sql = new mysqli("localhost", "root", "", "dastur");
-
-    
-
 if(!empty($_POST['ism']) && !empty($_POST['familiya']) && !empty($_POST['telefon'])){
     $ism = $_POST['ism'];
     $fam = $_POST['familiya'];
