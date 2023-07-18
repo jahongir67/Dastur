@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Jurnal</title>
+    <link rel="stylesheet" href="bulma-0.9.4/bulma/css/bulma.css">
     <style>
         body{
             width: 100vw;
@@ -40,6 +41,9 @@
     <a href="add.php">Yangi O'quvchi Qo'shish</a>
     <a href="jadval.php">Jadval</a>
 
-    <a href="database.php" style="background-color: green;margin-top: 200px;" target="_blank">Malumotlar Bazasi Yaratish</a>
+    <form action="database.php" method="post" style="margin-top: 100px;">
+        <input type="number" name="gsoni" id="" class="input is-info" style="width: 100px;">
+        <button type="submit" class="button is-info" style="width: 100px;">Tayyor</button>
+    </form>
 </body>
 </html>
