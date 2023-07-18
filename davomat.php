@@ -21,9 +21,8 @@
             <div class="select is-info">
             <select name='klasslar' id='sl'>
                 <?php
-                    $db = new mysqli("localhost", "root", "", "dastur");
                     $bz = "SHOW TABLES";
-                    $result = $db -> query($bz);
+                    $result = $sql -> query($bz);
 
                     while ($row = $result -> fetch_assoc()) {
                         echo "<option value='".$row['Tables_in_dastur']."'>".$row['Tables_in_dastur']."</option>";
@@ -73,7 +72,7 @@
 </html>
 
 <?php
-$sql = new mysqli("localhost", "root", "", "dastur");
+include "db.php";
 
 if(!empty($_POST['klasslar']) && !empty($_POST['userID']) && !empty($_POST['davomat']) && !empty($_POST['sana'])){
     $kls = $_POST['klasslar'];
